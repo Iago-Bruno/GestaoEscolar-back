@@ -8,10 +8,11 @@ import { Class } from './ClassModel';
 import { User } from './UserModel';
 import { Schedule } from './ScheduleModel';
 import { Score } from './ScoreModel';
+import { TeacherClasses } from './TeacherClasses';
 
 const db: any = {};
 const config: any = configSequelize;
-const models = [Class, User, Schedule, Score];
+const models = [Class, User, Schedule, Score, TeacherClasses];
 
 let sequelize: any = new Sequelize(
   config[env].database,

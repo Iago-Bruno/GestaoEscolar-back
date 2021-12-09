@@ -78,6 +78,29 @@ class UserController {
 
         return res.json(deletedUser);
     }
+
+    async listScores(req: Request, res: Response) {
+        const { id } = req.params;
+
+        const userSerialized = await userService.listScores(parseInt(id));
+        return res.json(userSerialized);
+    }
+
+    async listTeacherClasses(req: Request, res: Response){
+        const { id } = req.params;
+
+        const classes = await userService.listTeacherClasses(parseInt(id));
+
+        return res.json(classes);
+    }
+
+    async listStudentsByClass(req: Request, res: Response){
+        const { class_id, teacher_id } = req.params;
+
+        const students = await userService.listStudents(parseInt(class_id), parseInt(teacher_id));
+
+        return res.json(students);
+    }
 }
 
 export const userController = new UserController();

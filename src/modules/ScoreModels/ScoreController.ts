@@ -70,6 +70,14 @@ class ScoreController {
 
         return res.json(deletedScore);
     }
+
+    async listScoresByTeacher(req: Request, res: Response){
+        const { id } = req.params;
+
+        const scores = await scoreService.listScoresByTeacher(parseInt(id));
+
+        return res.json(scores);
+    }
 }
 
 export const scoreController = new ScoreController();

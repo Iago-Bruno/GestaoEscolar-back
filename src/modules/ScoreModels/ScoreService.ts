@@ -62,6 +62,12 @@ class ScoreService {
 
         return scoreDeleted;
     }
+
+    async listScoresByTeacher(teacher_id: number){
+        const scores = await this.scoreModel.findAll({ where: { teacher_id } });
+
+        return scores;
+    }
 }
 
 export const scoreService = new ScoreService();

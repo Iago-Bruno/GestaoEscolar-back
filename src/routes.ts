@@ -12,6 +12,9 @@ router.get('/users', userController.list);
 router.get('/users/:id', userController.get);
 router.put('/users/:id', userController.update);
 router.delete('/users/:id', userController.delete);
+router.get('/users/list-scores/:id', userController.listScores);
+router.get('/users/list-teacher-classes/:id', userController.listTeacherClasses);
+router.get('users/list-students-by-class/:id', userController.listStudentsByClass);
 
 router.post('/login', userController.authenticate);
 
@@ -32,5 +35,6 @@ router.get('/score', scoreController.list);
 router.get('/score/:id', scoreController.get);
 router.put('/score/:id', scoreController.update);
 router.delete('/score/:id', scoreController.delete);
+router.get('/score/list-scores-by-teacher', scoreController.listScoresByTeacher);
 
 export default router;
