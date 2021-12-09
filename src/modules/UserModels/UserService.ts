@@ -1,13 +1,19 @@
 import { database } from "../../database/models";
 import { User } from "../../database/models/UserModel";
 
-import { UserAttributes } from "../../types/ModelTypes";
+import { ClassAttributes, TeacherClassesAttributes, UserAttributes } from "../../types/ModelTypes";
 
 import { compare, hash } from "bcryptjs";
 import { sign } from 'jsonwebtoken';
+import { Class } from "../../database/models/ClassModel";
+import { Score } from "../../database/models/ScoreModel";
+import { TeacherClasses } from "../../database/models/TeacherClasses";
 
 class UserService {
     userModel = User(database.sequelize);
+    classModel = Class(database.sequelize);
+    scoresModel = Score(database.sequelize);
+    teacherClassesModel = TeacherClasses(database.sequelize);
 
     async create(data: UserAttributes) {
         const userAlreadyExists = await this.userModel.findOne({
@@ -87,6 +93,52 @@ class UserService {
         const user = await this.userModel.destroy({ where: { id } });
         
         return userDeleted;
+    }
+
+    async listScores(id: number) {
+        const user = await this.userModel.findOne({ where: { id } });
+
+        if (!user) throw new Error("User not found");
+
+        const userClass = await this.classModel.findOne({ where: { id: user?.class_id } });
+
+        const scores = await this.scoresModel.findAll({ where: { student_id: user.id } });
+
+        const userSerialized = {
+            user,
+            userClass,
+            scores,
+        };
+
+        return userSerialized;
+    }
+
+    async listTeacherClasses(id: number){
+        const teacher = await this.userModel.findOne({ where: { id } });
+
+        if (!teacher) throw new Error("User not found");
+
+        const teacherClasses = await this.teacherClassesModel.findAll({
+            where: { teacher_id: teacher.id }
+        });
+
+        let classes: ClassAttributes[] = [];
+        let oneClass;
+        for (const teacherClass of teacherClasses){
+            oneClass = await this.classModel.findOne({ where: { id: teacherClass.class_id }});
+
+            if (oneClass) {
+                classes.push(oneClass);
+            }
+        }
+
+        return classes;
+    }
+
+    async listStudents(class_id: number){
+        const students = await this.userModel.findAll({ where: { class_id } });
+
+        return students;
     }
 }
 

@@ -5,6 +5,12 @@ export interface ClassAttributes {
     year: number,
 }
 
+export interface TeacherClassesAttributes{
+    id?: number,
+    teacher_id: number;
+    class_id: number;
+}
+
 export interface UserAttributes {
     id?: number;
     class_id?: number;
