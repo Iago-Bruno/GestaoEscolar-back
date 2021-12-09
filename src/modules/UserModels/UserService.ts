@@ -48,13 +48,13 @@ class UserService {
         const user = await this.userModel.findOne({where: { email }});
 
         if(!user){
-            return { error: "Email/password incorrect" };
+            throw new Error("email incorrect");
         }
 
         const passwordMatch = await compare(password, user.password);
     
         if(!passwordMatch){
-            return { error: "Email/password incorrect" };
+            throw new Error("password incorrect");
         }
 
         const token = sign({
