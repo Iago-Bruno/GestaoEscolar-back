@@ -95,9 +95,9 @@ class UserController {
     }
 
     async listStudentsByClass(req: Request, res: Response){
-        const { id } = req.params;
+        const { class_id, teacher_id } = req.params;
 
-        const students = await userService.listStudents(parseInt(id));
+        const students = await userService.listStudents(parseInt(class_id), parseInt(teacher_id));
 
         return res.json(students);
     }

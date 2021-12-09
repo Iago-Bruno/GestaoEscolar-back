@@ -135,10 +135,24 @@ class UserService {
         return classes;
     }
 
-    async listStudents(class_id: number){
+    async listStudents(class_id: number, teacher_id: number){
         const students = await this.userModel.findAll({ where: { class_id } });
 
-        return students;
+        let studentsSerialized: any[] = [];
+        let scores;
+
+        for (const student of students){
+            scores = await this.scoresModel.findAll({
+                where: { student_id: student.id, teacher_id },
+            });
+
+            studentsSerialized.push({
+                student,
+                scores,
+            });
+        }
+
+        return studentsSerialized;
     }
 }
 
