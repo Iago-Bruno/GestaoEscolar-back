@@ -34,6 +34,7 @@ class UserService {
             name: data.name,
             type: data.type,
             registration: data.registration,
+            class_id: data.class_id,
         });
 
         return user;

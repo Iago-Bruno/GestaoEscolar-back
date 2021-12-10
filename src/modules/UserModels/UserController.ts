@@ -9,6 +9,7 @@ class UserController {
             email,
             type,
             password,
+            class_id,
         } = req.body;
 
         console.log(name, registration, email, type, password);
@@ -19,6 +20,7 @@ class UserController {
             email,
             type,
             password,
+            class_id,
         });
 
         console.log(user);
@@ -55,6 +57,7 @@ class UserController {
             email,
             password,
             type,
+            class_id,
         } = req.body;
 
         const { id } = req.params;
@@ -66,6 +69,7 @@ class UserController {
             email,
             password,
             type,
+            class_id,
         });
 
         return res.json(updatedUser);

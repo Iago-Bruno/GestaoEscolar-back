@@ -31,11 +31,23 @@ class ClassService {
     }
 
     async listClasses() {
-        const listClass = await this.classModel.findAll({
-            include: [this.userModel],
-        });
+        const listClass = await this.classModel.findAll();
 
-        return listClass;
+        const classes: any[] = [];
+        let users;
+
+        for (const oneClass of listClass){
+            users = await this.userModel.findAll({ where: { class_id: oneClass.id } });
+            console.log(users);
+            console.log(oneClass);
+
+            classes.push({
+                class: oneClass,
+                users,
+            });
+        }
+
+        return classes;
     }
 
     async getClass(id: number) {
