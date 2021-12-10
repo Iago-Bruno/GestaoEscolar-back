@@ -9,7 +9,11 @@ export const Score = ( sequelize: any ) => {
         rate!: number;
         year!: number;
         matter!: string;
-        bimester!: string;
+        first_bimester?: number;
+        second_bimester?: number;
+        third_bimester?: number;
+        fourth_bimester?: number;
+
 
         static associate( models: any ) {
             ScoreModel.hasMany(models.UserModel);
@@ -51,9 +55,21 @@ export const Score = ( sequelize: any ) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        bimester: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        first_bimester: {
+            type: DataTypes.DOUBLE,
+            allowNull: true,
+        },
+        second_bimester: {
+            type: DataTypes.DOUBLE,
+            allowNull: true,
+        },
+        third_bimester: {
+            type: DataTypes.DOUBLE,
+            allowNull: true,
+        },
+        fourth_bimester: {
+            type: DataTypes.DOUBLE,
+            allowNull: true,
         }
     }, {
         sequelize,

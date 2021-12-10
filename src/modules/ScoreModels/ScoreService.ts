@@ -9,7 +9,10 @@ class ScoreService {
     async create(data: ScoreAttributes) {
         const scoreAlreadyExists = await this.scoreModel.findOne({
             where: {
-                bimester: data.bimester,
+                first_bimester: data.first_bimester,
+                second_bimester: data.second_bimester,
+                third_bimester: data.third_bimester,
+                fourth_bimester: data.fourth_bimester,
                 matter: data.matter,
                 year: data.year,
             },
@@ -25,7 +28,10 @@ class ScoreService {
             rate: data.rate,
             year: data.year,
             matter: data.matter,
-            bimester: data.bimester,
+            first_bimester: data.first_bimester,
+            second_bimester: data.second_bimester,
+            third_bimester: data.third_bimester,
+            fourth_bimester: data.fourth_bimester,
         });
 
         return score;

@@ -9,12 +9,12 @@ import { scoreController } from './modules/ScoreModels/ScoreController';
 
 router.post('/users', userController.createUser);
 router.get('/users', userController.list);
+router.get('/users/list-scores/:id', userController.listScores);
+router.get('/users/list-teacher-classes/:id', userController.listTeacherClasses);
+router.get('/users/list-students/:teacher_id/by-class/:class_id', userController.listStudentsByClass);
 router.get('/users/:id', userController.get);
 router.put('/users/:id', userController.update);
 router.delete('/users/:id', userController.delete);
-router.get('/users/list-scores/:id', userController.listScores);
-router.get('/users/list-teacher-classes/:id', userController.listTeacherClasses);
-router.get('users/list-students-by-class/:id', userController.listStudentsByClass);
 
 router.post('/login', userController.authenticate);
 

@@ -104,11 +104,19 @@ class UserService {
         const userClass = await this.classModel.findOne({ where: { id: user?.class_id } });
 
         const scores = await this.scoresModel.findAll({ where: { student_id: user.id } });
+        let scoresSerialized: any[] = [];
+
+        for(const score of scores){
+            scoresSerialized.push({
+                score,
+                teacher: await this.userModel.findOne({ where: { id: score.teacher_id } }),
+            });
+        }
 
         const userSerialized = {
             user,
             userClass,
-            scores,
+            scoresSerialized,
         };
 
         return userSerialized;

@@ -37,5 +37,8 @@ export interface ScoreAttributes {
     rate: number;
     year: number;
     matter: string;
-    bimester: string;
+    first_bimester?: number;
+    second_bimester?: number;
+    third_bimester?: number;
+    fourth_bimester?: number;
 }

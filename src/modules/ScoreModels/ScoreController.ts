@@ -9,7 +9,10 @@ class ScoreController {
             rate,
             year,
             matter,
-            bimester,
+            first_bimester,
+            second_bimester,
+            third_bimester,
+            fourth_bimester,
         } = req.body;
 
         const score = await scoreService.create({
@@ -18,7 +21,10 @@ class ScoreController {
             rate,
             year,
             matter,
-            bimester,
+            first_bimester,
+            second_bimester,
+            third_bimester,
+            fourth_bimester,
         });
 
         return res.json(score);
@@ -45,7 +51,10 @@ class ScoreController {
             rate,
             year,
             matter,
-            bimester,
+            first_bimester,
+            second_bimester,
+            third_bimester,
+            fourth_bimester,
         } = req.body;
 
         const { id } = req.params;
@@ -57,7 +66,10 @@ class ScoreController {
             rate,
             year,
             matter,
-            bimester,
+            first_bimester,
+            second_bimester,
+            third_bimester,
+            fourth_bimester,
         });
 
         return res.json(updatedScore);
